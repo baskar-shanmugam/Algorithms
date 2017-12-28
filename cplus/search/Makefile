@@ -1,6 +1,6 @@
 CCFLAGS = -W -Wall -I..
 # executable files for this directory
-OBJECTS = SymbolTable.exe SymbolTableList.exe
+OBJECTS = SymbolTable.exe SymbolTableList.exe SymbolTableListSP.exe
 
 # tells make to use the file "../GNU_makefile_template", which
 # defines general rules for making .o and .exe files
