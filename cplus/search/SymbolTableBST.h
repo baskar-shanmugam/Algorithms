@@ -36,6 +36,48 @@ public:
     // number of key-value pairs in the table
     size_t size();
 
+    // smallest key
+      Key min() {
+          if (root) {
+              return min(root);
+          }
+          return NULL;
+      }
+
+      // largest key
+      Key max() {
+          if (root) {
+              return max(root);
+          }
+          return NULL;
+      }
+
+      // largest key less than or equal to key
+      Key floor(Key key) {
+          return floor(root, key);
+      }
+
+      // smallest key greater than or equal to key
+      Key ceiling(Key key);
+
+      // number of keys less than key
+      size_t rank(Key key);
+
+      // key of rank k
+      Key select(int k);
+
+      // delete smallest key
+      void deleteMin() {
+          deleteEntry(min());
+      }
+
+      // delete largest key
+      void deleteMax() {
+          deleteEntry(max());
+      }
+
+      // number of keys in [lo..hi]
+      int size(Key lo, Key hi);
 
 private:
     class Node {
@@ -88,6 +130,33 @@ private:
             return 0;
         }
         return n->count;
+    }
+    Key min(Node *n) {
+        return (n->lnode ==nullptr? n->key:min(n->lnode));
+    }
+    Key max(Node *n) {
+        return (n->rnode ==nullptr? n->key:max(n->rnode));
+    }
+    Key floor(Node *n, Key k) {
+        if (n == nullptr) {
+            return NULL;
+        }
+        if (n->key == k) {
+            return k;
+        }
+
+        if (n->key < k) {
+            Key tmp = floor(n->rnode, k);
+            if (tmp == NULL) {
+                return n->key;
+            } else {
+                return tmp;
+            }
+        }
+        if (n->key > k) {
+                return floor(n->lnode, k);
+        }
+        return NULL;
     }
 };
 
