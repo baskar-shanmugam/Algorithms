@@ -58,7 +58,9 @@ public:
       }
 
       // smallest key greater than or equal to key
-      Key ceiling(Key key);
+      Key ceiling(Key key) {
+          return ceiling(root, key);
+      }
 
       // number of keys less than key
       size_t rank(Key key);
@@ -155,6 +157,27 @@ private:
         }
         if (n->key > k) {
                 return floor(n->lnode, k);
+        }
+        return NULL;
+    }
+    Key ceiling(Node *n, Key k) {
+        if (n == nullptr) {
+            return NULL;
+        }
+        if (n->key == k) {
+            return k;
+        }
+
+        if (n->key > k) {
+            Key tmp = ceiling(n->lnode, k);
+            if (tmp == NULL) {
+                return n->key;
+            } else {
+                return tmp;
+            }
+        }
+        if (n->key < k) {
+            return ceiling(n->rnode, k);
         }
         return NULL;
     }

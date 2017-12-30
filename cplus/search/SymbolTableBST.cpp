@@ -69,6 +69,9 @@ int main() {
     std::cout << "floor of 48: " << st.floor(48) << std::endl;
     std::cout << "floor of 78: " << st.floor(78) << std::endl;
     std::cout << "floor of 42: " << st.floor(42) << std::endl;
+    std::cout << "ceiling of 42: " << st.ceiling(42) << std::endl;
+    std::cout << "ceiling of 56: " << st.ceiling(56) << std::endl;
+
  //   st.deleteEntry(20);
     std::cout << st.size() << " " << st.isEmpty()<< std::endl;
  //   st.deleteEntry(10);
