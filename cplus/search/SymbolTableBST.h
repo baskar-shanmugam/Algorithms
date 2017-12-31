@@ -181,6 +181,30 @@ private:
         }
         return NULL;
     }
+    Node* rank(Node *node, Key k, size_t* rk, bool* match) {
+        if ((node == nullptr) || (*match==true)) {
+            return NULL;
+        }
+        if (rank(node->lnode, k, rk, match) != NULL) {
+            if ((*match == true) && (node->key > node->lnode->key)) {
+                return node;
+            }
+            *rk = *rk + 1;
+        }
+
+        if (node->key ==k) {
+            *match = true;
+            return node;
+        }
+
+        if (rank(node->rnode, k, rk, match) != NULL) {
+            if ((*match == true) && (node->key > node->rnode->key)) {
+                return node;
+            }
+            *rk = *rk + 1;
+        }
+        return node;
+    }
 };
 
 #endif /* SYMBOLTABLEBST_H_ */

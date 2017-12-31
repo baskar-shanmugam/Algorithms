@@ -38,6 +38,16 @@ template<typename Key, typename Value>
 size_t SymbolTableBST<Key, Value>::size() {
     return size(root);
 }
+template<typename Key, typename Value>
+size_t SymbolTableBST<Key, Value>::rank(Key key) {
+    size_t rk = 0;
+    bool match = false;
+    if (!contains(key)) {
+        return rk;
+    }
+    rank(root, key, &rk, &match);
+    return rk;
+}
 
 
 int main() {
@@ -71,6 +81,17 @@ int main() {
     std::cout << "floor of 42: " << st.floor(42) << std::endl;
     std::cout << "ceiling of 42: " << st.ceiling(42) << std::endl;
     std::cout << "ceiling of 56: " << st.ceiling(56) << std::endl;
+    std::cout << "contains of 43: " << st.contains(43) << std::endl;
+    std::cout << "contains of 77: " << st.contains(77) << std::endl;
+    std::cout << "contains of 55: " << st.contains(55) << std::endl;
+    std::cout << "contains of 30: " << st.contains(30) << std::endl;
+    std::cout << "contains of 40: " << st.contains(40) << std::endl;
+    std::cout << "contains of 41: " << st.contains(41) << std::endl;
+    std::cout << "rank of 43: " << st.rank(43) << std::endl;
+    std::cout << "rank of 77: " << st.rank(77) << std::endl;
+    std::cout << "rank of 55: " << st.rank(55) << std::endl;
+    std::cout << "rank of 30: " << st.rank(30) << std::endl;
+    std::cout << "rank of 40: " << st.rank(40) << std::endl;
 
  //   st.deleteEntry(20);
     std::cout << st.size() << " " << st.isEmpty()<< std::endl;
