@@ -205,6 +205,48 @@ private:
         }
         return node;
     }
+    Node* deleteEntry(Node *node, Key k) {
+        if (node->key < k) {
+            node->rnode = deleteEntry(node->rnode, k);
+        }
+        if (node->key > k) {
+            node->lnode = deleteEntry(node->lnode, k);
+        }
+
+        if (node->key == k) {
+            if ((node->lnode == nullptr) && (node->rnode == nullptr)) {
+                delete node;
+                return nullptr;
+            }
+            if (node->lnode == nullptr) {
+                Node *child = node->rnode;
+                delete node;
+                return child;
+            }
+            if (node->rnode == nullptr) {
+                Node *child = node->lnode;
+                delete node;
+                return child;
+            }
+
+            Node *prev = node;
+            Node *curr = node->rnode;
+            while(curr) {
+                if(curr->lnode) {
+                    prev = curr;
+                    curr = curr->lnode;
+                } else {
+                    break;
+                }
+            }
+            prev->lnode = nullptr;
+            curr->lnode = node->lnode;
+            curr->rnode = node->rnode;
+            delete node;
+            return curr;
+        }
+        return node;
+    }
 };
 
 #endif /* SYMBOLTABLEBST_H_ */

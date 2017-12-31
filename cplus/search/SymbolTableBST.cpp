@@ -21,7 +21,9 @@ Value SymbolTableBST<Key, Value>::get(Key key) {
 
 template<typename Key, typename Value>
 void SymbolTableBST<Key, Value>::deleteEntry(Key key) {
-
+    if(contains(key)) {
+        root = deleteEntry(root, key);
+    }
 }
 
 template<typename Key, typename Value>
